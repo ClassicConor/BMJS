@@ -19,27 +19,25 @@
             }
 
             let reg_table_string = "<table border=1px>";
+
+            console.log(reg_table_string);
+
             for (let i = 0; i < registers.length; i++) {
                 if (i % 8 == 0 && i < registers.length) {
                     reg_table_string += "<\tr><tr>";
                 }
                 reg_table_string += "<td>R" + i + " " + registers[i].toString(16).toUpperCase().padStart(2, "0") + "</td>";
             }
+
+            reg_table_string += "<td><input type='text' id='input' value=\'" + registers[3].toString(16).toUpperCase().padStart(2, "0") + "\'></td>";
+
+            // reg_table_string += "<td><input type='text' id='input' value=" + machine_memory[i].toString(16).toUpperCase().padStart(2, "0") + "></td>";
             reg_table_string += "</table>";
 
             reg_table_string = reg_table_string.replace("<	r>", "");
             reg_table_string = reg_table_string.replace("<	r>", "");
 
             document.getElementById("Registers").innerHTML = reg_table_string;
-
-            // let mem_string = "";
-            // for (let i = 0; i < machine_memory.length; i++) {
-            //     mem_string += String(i).padStart(3, "0") + ": 0x" + machine_memory[i].toString(16).toUpperCase().padStart(2, "0") + " | ";
-            //     if (i % 8 == 7) {
-            //         mem_string += "<\a>";
-            //         mem_string += "<br>";
-            //     }
-            // }
 
             let mem_table_string = "<table border=1px>";
 
@@ -103,6 +101,18 @@
             "decode," and "execute" buttons, the algorithm progresses through its steps, updating the HTML elements
             accordingly.</p>
     </header>
+
+    <table>
+        <tr>
+            <td><input type="text" name="" id="" value="yeah"></td>
+            <td>CIR</td>
+        </tr>
+        <tr>
+            <td id="PC"></td>
+            <td id="CIR"></td>
+        </tr>
+    </table>
+
 
     <section id="controlArea">
         <textarea name="textArea" id="inputTextArea" cols="30" rows="10"></textarea>
