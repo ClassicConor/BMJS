@@ -1,24 +1,23 @@
+import { getByte, getNybble } from "./microcode"
+export var machine_memory = Array(256).fill(0);
+export var registers = Array(16).fill(0);
+export var PC = 0;
+export var CIR = 0;
+export var halted = false;
+export var instruction = null;
 
-var machine_memory = Array(256).fill(0);
-var registers = Array(16).fill(0);
-var PC = 0;
-var CIR = 0;
-var halted = false;
-var instruction = null;
 
-
-
-function set_memory(mem) {
+export function set_memory(mem) {
     machine_memory = mem;
 }
 
-function fetch() {
+export function fetch() {
     CIR = machine_memory[PC] << 8;
     CIR += machine_memory[PC + 1];
     PC += 2;
 }
 
-function decode() {
+export function decode() {
     let instruction_code = getNybble(CIR, 0);
     switch (instruction_code) {
         case 0x0: //no operation
@@ -74,7 +73,7 @@ function decode() {
     }
 }
 
-function execute() {
+export function execute() {
     instruction();
 }
 

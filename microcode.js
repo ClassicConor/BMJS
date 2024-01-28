@@ -1,4 +1,4 @@
-function getNybble(CIR, index){
+export function getNybble(CIR, index){
     if (index == 0)
     {
         return (CIR >> 12);
@@ -17,7 +17,7 @@ function getNybble(CIR, index){
     }
     return 0;
 }
-function getByte(CIR, index){
+export function getByte(CIR, index){
     if (index == 0){
         return (CIR >> 8);
     }
