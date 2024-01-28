@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My HTML Page</title>
+    <script src="microcode.js"></script>
+    <script src="main.js"></script>
+    <script>
+        function update_html() {
+            document.getElementById("PC").innerHTML = PC;
+            document.getElementById("CIR").innerHTML = CIR.toString(16).toUpperCase().padStart(2, "4");
+
+            let reg_string = "";
+            for (let i = 0; i < registers.length; i++) {
+                reg_string += "R" + i + ": " + registers[i].toString(16).toUpperCase().padStart(2, "0") + " ";
+                if (i == 7) {
+                    reg_string += "<br>";
+                }
+            }
+
+            let reg_table_string = "<table border=1px>";
+            for (let i = 0; i < registers.length; i++) {
+                if (i % 8 == 0 && i < registers.length) {
+                    reg_table_string += "<\tr><tr>";
+                }
+                reg_table_string += "<td>R" + i + " " + registers[i].toString(16).toUpperCase().padStart(2, "0") + "</td>";
+            }
+            reg_table_string += "</table>";
+
+            reg_table_string = reg_table_string.replace("<	r>", "");
+            reg_table_string = reg_table_string.replace("<	r>", "");
+
+            document.getElementById("Registers").innerHTML = reg_table_string;
+
+            // let mem_string = "";
+            // for (let i = 0; i < machine_memory.length; i++) {
+            //     mem_string += String(i).padStart(3, "0") + ": 0x" + machine_memory[i].toString(16).toUpperCase().padStart(2, "0") + " | ";
+            //     if (i % 8 == 7) {
+            //         mem_string += "<\a>";
+            //         mem_string += "<br>";
+            //     }
+            // }
+
+            let mem_table_string = "<table border=1px>";
+
+
+            for (let i = 0; i < machine_memory.length; i++) {
+                if (i % 8 == 0 && i < machine_memory.length) {
+                    mem_table_string += "<\tr><tr>";
+                }
+                mem_table_string += "<td>" + String(i).padStart(3, "0") + ": 0x" + machine_memory[i].toString(16).toUpperCase().padStart(2, "0") + "</td>";
+            }
+
+
+            mem_table_string += "<td></td>";
+
+            for (i = 0; i < 33; i++) {
+                mem_table_string = mem_table_string.replace("<	r>", "");
+            }
+
+            console.log(mem_table_string);
+
+
+
+            document.getElementById("Memory").innerHTML = mem_table_string;
+            console.log(machine_memory[10]);
+        }
+    </script>
+
+    <script>
+        //TODO: ROT DOESN'T WORK PROPERLY
+        machine_memory[0] = 0x20;
+        machine_memory[1] = 0xff;
+        machine_memory[2] = 0x21;
+        machine_memory[3] = 0xff;
+
+        machine_memory[4] = 0xF1;
+        machine_memory[5] = 0x02;
+
+    </script>
+
+    <style>
+        table {
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body onload="update_html()">
+
+    <header id="titleAndDescription">
+        <h1>Brookshire Machine Algorithm</h1>
+        <p>The Brookshire Machine Algorithm is a computational process that operates on a machine's memory and executes
+            instructions stored in that memory. In the provided code excerpt, the algorithm is being implemented within
+            an HTML file. The algorithm involves a series of steps, including fetching instructions from memory,
+            decoding them to determine their meaning, and executing the corresponding operations. The algorithm also
+            involves the use of registers, which are special storage locations within the machine that hold data
+            temporarily. The algorithm's progress is displayed on the webpage through various HTML elements, such as the
+            PC (Program Counter), CIR (Current Instruction Register), and memory contents. By clicking the "fetch,"
+            "decode," and "execute" buttons, the algorithm progresses through its steps, updating the HTML elements
+            accordingly.</p>
+    </header>
+
+    <section id="controlArea">
+        <textarea name="textArea" id="inputTextArea" cols="30" rows="10"></textarea>
+        <br>
+        <button onclick="{fetch();update_html()}">fetch</button>
+        <button onclick="{decode();update_html()}">decode</button>
+        <button onclick="{execute();update_html()}">execute</button>
+    </section>
+
+    <section id="displayPCandCIR">
+        <table border="1px">
+            <tr>
+                <td>PC</td>
+                <td>CIR</td>
+            </tr>
+            <tr>
+                <td id="PC"></td>
+                <td id="CIR"></td>
+            </tr>
+        </table>
+    </section>
+
+    <table id="registerTable">
+    </table>
+
+    <section id="registerArea">
+        <h3> Registers</h3>
+        <p id="Registers"></p>
+
+    </section>
+
+    <section id="memoryArea">
+        <h3> Memory</h3>
+        <p id="Memory"> </p>
+    </section>
+
+</body>
+
+</html>

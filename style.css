@@ -1,0 +1,21 @@
+#titleAndDescription {
+    text-align: center;
+}
+
+#controlArea {
+    text-align: center;
+}
+
+#displayPCandCIR {
+    margin-left: auto;
+    margin-right: auto;
+    margin: 2%;
+}
+
+#registerArea {
+    text-align: center;
+}
+
+#memoryArea {
+    text-align: center;
+}
