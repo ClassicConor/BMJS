@@ -8,7 +8,7 @@ export var instruction = null;
 
 
 export function set_memory(mem) {
-  machine_memory = mem;
+    machine_memory = mem;
 }
 
 export function machine_fetch() {
@@ -79,129 +79,129 @@ export function machine_execute() {
 }
 
 function NOP() {
-  return;
+    return;
 }
 
 function Load_Direct() {
-  let r = getNybble(CIR, 1);
-  let address = getByte(CIR, 1);
-  console.log(address);
-  registers[r] = machine_memory[address];
+    let r = getNybble(CIR, 1);
+    let address = getByte(CIR, 1);
+    console.log(address);
+    registers[r] = machine_memory[address];
 }
 
 function Load_Indirect() {
-  let r = getNybble(CIR, 1);
-  let value = getByte(CIR, 1);
-  registers[r] = value;
+    let r = getNybble(CIR, 1);
+    let value = getByte(CIR, 1);
+    registers[r] = value;
 }
 
 function Store_Direct() {
-  let r = getNybble(CIR, 1);
-  let address = getByte(CIR, 1);
-  machine_memory[address] = registers[r];
+    let r = getNybble(CIR, 1);
+    let address = getByte(CIR, 1);
+    machine_memory[address] = registers[r];
 }
 
 function Move_Registers() {
-  let r = getNybble(CIR, 2);
-  let s = getNybble(CIR, 3);
-  registers[s] = registers[r];
+    let r = getNybble(CIR, 2);
+    let s = getNybble(CIR, 3);
+    registers[s] = registers[r];
 }
 
 function Addi() {
-  let r = getNybble(CIR, 1);
-  let s = getNybble(CIR, 2);
-  let t = getNybble(CIR, 3);
-  //why would js have types????
-  // thus % 256 to simulate overflow
-  registers[r] = registers[s] + (registers[t] % 256);
+    let r = getNybble(CIR, 1);
+    let s = getNybble(CIR, 2);
+    let t = getNybble(CIR, 3);
+    //why would js have types????
+    // thus % 256 to simulate overflow
+    registers[r] = registers[s] + (registers[t] % 256);
 }
 function Addf() {
-  let r = getNybble(CIR, 1);
-  let s = getNybble(CIR, 2);
-  let t = getNybble(CIR, 3);
-  //todo: learn how to do this???
+    let r = getNybble(CIR, 1);
+    let s = getNybble(CIR, 2);
+    let t = getNybble(CIR, 3);
+    //todo: learn how to do this???
 }
 
 function Bitwise_OR() {
-  let r = getNybble(CIR, 1);
-  let s = getNybble(CIR, 2);
-  let t = getNybble(CIR, 3);
-  registers[r] = registers[s] | registers[t];
+    let r = getNybble(CIR, 1);
+    let s = getNybble(CIR, 2);
+    let t = getNybble(CIR, 3);
+    registers[r] = registers[s] | registers[t];
 }
 
 function Bitwise_AND() {
-  let r = getNybble(CIR, 1);
-  let s = getNybble(CIR, 2);
-  let t = getNybble(CIR, 3);
-  registers[r] = registers[s] & registers[t];
+    let r = getNybble(CIR, 1);
+    let s = getNybble(CIR, 2);
+    let t = getNybble(CIR, 3);
+    registers[r] = registers[s] & registers[t];
 }
 
 function Bitwise_XOR() {
-  let r = getNybble(CIR, 1);
-  let s = getNybble(CIR, 2);
-  let t = getNybble(CIR, 3);
-  registers[r] = registers[s] ^ registers[t];
+    let r = getNybble(CIR, 1);
+    let s = getNybble(CIR, 2);
+    let t = getNybble(CIR, 3);
+    registers[r] = registers[s] ^ registers[t];
 }
 
 function ROT() {
-  let target_register = getNybble(CIR, 1);
-  let rotate_amount = getNybble(CIR, 3);
-  let data = registers[target_register];
-  registers[target_register] =
-    (data >> rotate_amount) | ((data << (8 - rotate_amount)) & 0xff);
+    let target_register = getNybble(CIR, 1);
+    let rotate_amount = getNybble(CIR, 3);
+    let data = registers[target_register];
+    registers[target_register] =
+        (data >> rotate_amount) | ((data << (8 - rotate_amount)) & 0xff);
 }
 
 function JMPEQ() {
-  let r = getNybble(CIR, 1);
-  if (registers[r] == registers[0]) {
-    PC = getByte(CIR, 1);
-  }
+    let r = getNybble(CIR, 1);
+    if (registers[r] == registers[0]) {
+        PC = getByte(CIR, 1);
+    }
 }
 
 function HALT() {
-  halted = true;
+    halted = true;
 }
 
 function Load_Register_indirect() {
-  let r = getNybble(CIR, 2);
-  let s = getNybble(CIR, 3);
+    let r = getNybble(CIR, 2);
+    let s = getNybble(CIR, 3);
 
-  registers[r] = machine_memory[registers[s]];
+    registers[r] = machine_memory[registers[s]];
 }
 
 function Store_Register_indirect() {
-  let r = getNybble(CIR, 2);
-  let s = getNybble(CIR, 3);
-  machine_memory[registers[s]] = registers[r];
+    let r = getNybble(CIR, 2);
+    let s = getNybble(CIR, 3);
+    machine_memory[registers[s]] = registers[r];
 }
 
 function JUMPCMP() {
-  let r = getNybble(CIR, 1);
-  let x = getNybble(CIR, 2);
-  let t = getNybble(CIR, 3);
+    let r = getNybble(CIR, 1);
+    let x = getNybble(CIR, 2);
+    let t = getNybble(CIR, 3);
 
-  let fufilled = false;
-  switch (x) {
-    case 0:
-      fufilled = registers[r] == registers[0];
-      break;
-    case 1:
-      fufilled = registers[r] != registers[0];
-      break;
-    case 2:
-      fufilled = registers[r] >= registers[0];
-      break;
-    case 3:
-      fufilled = registers[r] <= registers[0];
-      break;
-    case 4:
-      fufilled = regisers[r] > registers[0];
-      break;
-    case 5:
-      fufilled = regisers[r] < registers[0];
-      break;
-  }
-  if (fufilled) {
-    PC = registers[t];
-  }
+    let fufilled = false;
+    switch (x) {
+        case 0:
+            fufilled = registers[r] == registers[0];
+            break;
+        case 1:
+            fufilled = registers[r] != registers[0];
+            break;
+        case 2:
+            fufilled = registers[r] >= registers[0];
+            break;
+        case 3:
+            fufilled = registers[r] <= registers[0];
+            break;
+        case 4:
+            fufilled = regisers[r] > registers[0];
+            break;
+        case 5:
+            fufilled = regisers[r] < registers[0];
+            break;
+    }
+    if (fufilled) {
+        PC = registers[t];
+    }
 }
