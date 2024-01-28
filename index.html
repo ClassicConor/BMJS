@@ -3,9 +3,21 @@
 
 <head>
     <title>My HTML Page</title>
-    <script src="microcode.js"></script>
-    <script src="main.js"></script>
-    <script>
+    <script type="module">
+        import { machine_memory, registers, PC, CIR } from "./main";
+        update_html()
+        document.getElementById("fetch", () => {
+            fetch();
+            update_html()
+        })
+        document.getElementById("decode", () => {
+            decode();
+            update_html()
+        })
+        document.getElementById("execute", () => {
+            execute();
+            update_html()
+        })
         function update_html() {
             document.getElementById("PC").innerHTML = PC;
             document.getElementById("CIR").innerHTML = CIR.toString(16).toUpperCase().padStart(2, "4");
@@ -50,7 +62,7 @@
 
             mem_table_string += "<td></td>";
 
-            for (i = 0; i < 33; i++) {
+            for (let i = 0; i < 33; i++) {
                 mem_table_string = mem_table_string.replace("<	r>", "");
             }
 
@@ -61,10 +73,8 @@
             document.getElementById("Memory").innerHTML = mem_table_string;
             console.log(machine_memory[10]);
         }
-    </script>
 
-    <script>
-        //TODO: ROT DOESN'T WORK PROPERLY
+        
         machine_memory[0] = 0x20;
         machine_memory[1] = 0xff;
         machine_memory[2] = 0x21;
@@ -72,7 +82,6 @@
 
         machine_memory[4] = 0xF1;
         machine_memory[5] = 0x02;
-
     </script>
 
     <style>
@@ -85,7 +94,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body onload="update_html()">
+<body>
 
     <header id="titleAndDescription">
         <h1>Brookshire Machine Algorithm</h1>
@@ -115,9 +124,9 @@
     <section id="controlArea">
         <textarea name="textArea" id="inputTextArea" cols="30" rows="10"></textarea>
         <br>
-        <button onclick="{fetch();update_html()}">fetch</button>
-        <button onclick="{decode();update_html()}">decode</button>
-        <button onclick="{execute();update_html()}">execute</button>
+        <button id="fetch">fetch</button>
+        <button id="decode">decode</button>
+        <button id="execute">execute</button>
     </section>
 
     <section id="displayPCandCIR">
