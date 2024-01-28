@@ -58,7 +58,7 @@ function decode() {
       instruction = JMPEQ;
       break;
     case 0xc: //halt
-      instruction = HALT
+      instruction = HALT;
       break;
     case 0xd: //load register indirect
       instruction = Load_Register_indirect;
