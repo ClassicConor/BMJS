@@ -11,13 +11,14 @@ export function set_memory(mem) {
   machine_memory = mem;
 }
 
-export function fetch() {
+export function machine_fetch() {
+  console.debug("fetching")
   CIR = machine_memory[PC] << 8;
   CIR += machine_memory[PC + 1];
   PC += 2;
 }
 
-export function decode() {
+export function machine_decode() {
   let instruction_code = getNybble(CIR, 0);
   switch (instruction_code) {
     case 0x0: //no operation
@@ -73,7 +74,7 @@ export function decode() {
   }
 }
 
-export function execute() {
+export function machine_execute() {
   instruction();
 }
 
