@@ -1,2 +1,0 @@
-# JavaScriptAssembler
-JavaScriptAssembler Royal Holloway
