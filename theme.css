@@ -1,0 +1,79 @@
+:root {
+    --theme-text-1: #000000;
+    --theme-text-2: #1A1A1A;
+    --theme-background-1: #FFFFFF;
+	font-family: sans-serif;
+}
+
+
+body {
+	margin: 0 auto;
+	padding: 2rem;
+	border-radius: 6px;
+	/* overflow-x: hidden; */
+	word-break: break-word;
+	overflow-wrap: break-word;
+	background: var(--theme-background-1);
+
+	/* Main body text */
+	color: var(--theme-text-2);
+	font-size: 1.03rem;
+	line-height: 1.5;
+    
+    text-align: center;
+}
+
+body > *:not(.full-bleed) { 
+    position: relative;
+    max-width: 40rem;
+    margin: auto;
+  }
+  .full-bleed{ 
+    max-width: 100%;
+    overflow-x: scroll;
+  }
+
+h1,h2,h3,h4,h5,h6 {
+	line-height: 1;
+	color: var(--nc-tx-1);
+	padding-top: .875rem;
+}
+
+h1,
+h2,
+h3 {
+	color: var(--theme-text-1);
+	padding-bottom: 2px;
+	margin-bottom: 8px;
+	border-bottom: 1px solid var(--theme-background-1);
+}
+
+h4,
+h5,
+h6 {
+	margin-bottom: .3rem;
+}
+
+h1 {
+	font-size: 2.25rem;
+}
+
+h2 {
+	font-size: 1.85rem;
+}
+
+h3 {
+	font-size: 1.55rem;
+}
+
+h4 {
+	font-size: 1.25rem;
+}
+
+h5 {
+	font-size: 1rem;
+}
+
+h6 {
+	font-size: .875rem;
+}

@@ -115,11 +115,20 @@ function Addi() {
     // thus % 256 to simulate overflow
     registers[r] = registers[s] + (registers[t] % 256);
 }
+
 function Addf() {
     let r = getNybble(CIR, 1);
     let s = getNybble(CIR, 2);
     let t = getNybble(CIR, 3);
-    //todo: learn how to do this???
+    s_mantissa = parseInt(s.toString().slice(-4));
+    s_exponent = parseInt(s.toString().slice(4));
+    s_mantissa >> s_exponent;
+
+    t_mantissa = parseInt(t.toString().slice(-4));
+    t_exponent = parseInt(t.toString().slice(4));
+    t_mantissa >> t_exponent;
+
+    registers[r] = s_mantissa + (t_mantissa % 256);
 }
 
 function Bitwise_OR() {
